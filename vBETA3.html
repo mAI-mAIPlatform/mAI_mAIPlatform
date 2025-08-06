@@ -2,151 +2,77 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Clés API</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+  <title>mAI – mStore</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <style>
     body {
-      background-color: #0d1117;
-      color: #ffffff;
       font-family: 'Inter', sans-serif;
+      background-color: #fff;
+      color: #000;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .app-header {
       display: flex;
-      flex-direction: column;
       align-items: center;
-      padding: 60px 20px;
-      min-height: 100vh;
+      gap: 15px;
     }
 
-    h1 {
+    .app-logo {
+      width: 80px;
+      height: 80px;
+      border-radius: 20px;
+    }
+
+    .app-name {
       font-size: 32px;
-      font-weight: 700;
-      margin-bottom: 30px;
+      font-weight: 600;
     }
 
-    .container {
-      background-color: #161b22;
-      padding: 30px;
-      border-radius: 12px;
-      width: 100%;
-      max-width: 600px;
-      box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
-    }
-
-    label {
-      display: block;
-      font-size: 18px;
-      margin-bottom: 8px;
-      color: #c9d1d9;
-    }
-
-    input[type="text"] {
-      width: 100%;
-      padding: 12px;
-      font-size: 16px;
-      background-color: #0d1117;
-      border: 1px solid #30363d;
-      border-radius: 8px;
-      color: white;
-      margin-bottom: 20px;
-    }
-
-    button {
-      background-color: #238636;
-      border: none;
+    .download-btn {
+      display: inline-block;
       padding: 12px 24px;
-      font-size: 16px;
-      border-radius: 8px;
+      background-color: #007aff;
       color: white;
-      cursor: pointer;
-      transition: background-color 0.2s;
+      border-radius: 10px;
+      font-weight: 600;
+      text-decoration: none;
+      margin-top: 20px;
+      font-size: 16px;
     }
 
-    button:hover {
-      background-color: #2ea043;
+    .section {
+      margin-top: 40px;
     }
 
-    #result {
-      margin-top: 30px;
-      background-color: #0d1117;
-      padding: 16px;
-      border: 1px solid #30363d;
-      border-radius: 8px;
-      display: none;
-      word-break: break-all;
-    }
-
-    .key-label {
-      font-size: 14px;
-      color: #8b949e;
-      margin-bottom: 4px;
-    }
-
-    .key-value {
-      font-size: 18px;
-      font-weight: bold;
+    .section h2 {
+      font-size: 20px;
       margin-bottom: 10px;
     }
 
-    .copy-btn {
-      background-color: #21262d;
-      color: #c9d1d9;
-      border: 1px solid #30363d;
-      padding: 8px 16px;
-      border-radius: 6px;
-      font-size: 14px;
-      cursor: pointer;
-    }
-
-    .copy-btn:hover {
-      background-color: #30363d;
+    .version-box {
+      background-color: #f2f2f2;
+      padding: 12px 16px;
+      border-radius: 12px;
+      display: inline-block;
+      font-weight: 600;
     }
   </style>
 </head>
 <body>
 
-  <h1>Clés API</h1>
-
-  <div class="container">
-    <label for="keyName">Nom de la clé</label>
-    <input type="text" id="keyName" placeholder="Ex: Clé pour projet mSearch" />
-
-    <button onclick="generateKey()">Générer une clé API</button>
-
-    <div id="result">
-      <div class="key-label">Clé générée :</div>
-      <div class="key-value" id="generatedKey"></div>
-      <button class="copy-btn" onclick="copyKey()">Copier la clé</button>
-    </div>
+  <div class="app-header">
+    <img src="https://drive.google.com/uc?export=view&id=1KboFZOHcRpusoAA-s6q36Po6OlskvzGi" alt="Logo mAI" class="app-logo">
+    <div class="app-name">mAI</div>
   </div>
 
-  <script>
-    function generateKey() {
-      const name = document.getElementById('keyName').value.trim();
-      if (name === "") {
-        alert("Merci de nommer ta clé avant de la générer.");
-        return;
-      }
+  <a href="https://drive.google.com/uc?export=download&id=1KboFZOHcRpusoAA-s6q36Po6OlskvzGi" download class="download-btn">Obtenir</a>
 
-      let chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-      let key = 'm-';
-      for (let i = 0; i < 22; i++) {
-        key += chars.charAt(Math.floor(Math.random() * chars.length));
-      }
-
-      document.getElementById('generatedKey').innerText = key;
-      document.getElementById('result').style.display = 'block';
-    }
-
-    function copyKey() {
-      const key = document.getElementById('generatedKey').innerText;
-      navigator.clipboard.writeText(key).then(() => {
-        const btn = document.querySelector('.copy-btn');
-        btn.innerText = 'Clé copiée ✅';
-        setTimeout(() => {
-          btn.innerText = 'Copier la clé';
-        }, 2000);
-      });
-    }
-  </script>
+  <div class="section">
+    <h2>Version</h2>
+    <div class="version-box">Public Update Version</div>
+  </div>
 
 </body>
 </html>

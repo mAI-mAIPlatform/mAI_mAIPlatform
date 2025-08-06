@@ -2,75 +2,103 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Générateur de Clé API</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+  <title>mAI – mStore</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
   <style>
     body {
-      background-color: #121212;
-      color: #f1f1f1;
       font-family: 'Inter', sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
+      background-color: #ffffff;
+      color: #111;
       margin: 0;
+      padding: 0;
+    }
+    header {
+      padding: 30px 20px;
+      text-align: center;
+      border-bottom: 1px solid #eee;
+    }
+    .logo-text {
+      font-size: 48px;
+      font-weight: 800;
+      background: linear-gradient(90deg, #007aff, #ff2d55, #ffcc00, #34c759, #007aff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline-block;
+      margin-bottom: 10px;
     }
     h1 {
-      font-weight: 600;
+      font-size: 28px;
+      margin: 10px 0 5px;
     }
-    button {
-      background-color: #1f1f1f;
-      border: 1px solid #333;
-      color: #fff;
-      padding: 10px 20px;
+    .subtitle {
+      color: #666;
       font-size: 16px;
-      margin: 10px;
+    }
+    .download-btn {
+      background-color: #007aff;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      padding: 12px 24px;
+      font-weight: 600;
+      font-size: 16px;
+      margin: 20px auto;
+      display: inline-block;
+      text-decoration: none;
       cursor: pointer;
-      border-radius: 6px;
-      transition: background 0.2s;
+      transition: 0.3s;
     }
-    button:hover {
-      background-color: #333;
+    .download-btn:hover {
+      background-color: #005ecb;
     }
-    #key {
+    .section {
+      padding: 30px 20px;
+      max-width: 800px;
+      margin: auto;
+    }
+    h2 {
+      font-size: 22px;
+      margin-bottom: 10px;
+    }
+    .changelog {
+      background-color: #f2f2f2;
+      padding: 20px;
+      border-radius: 12px;
+      margin-top: 10px;
+    }
+    .version h3 {
+      margin: 0;
       font-size: 18px;
-      margin-top: 20px;
-      padding: 10px;
-      background-color: #1e1e1e;
-      border-radius: 6px;
-      word-break: break-all;
-    }
-    #copy-btn {
-      display: none;
+      color: #333;
     }
   </style>
 </head>
 <body>
-  <h1>Générateur de Clé API</h1>
-  <button onclick="generateKey()">Générer une clé</button>
-  <div id="key"></div>
-  <button id="copy-btn" onclick="copyKey()">Copier la clé</button>
 
-  <script>
-    function generateKey() {
-      let chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-      let key = 'm-';
-      for (let i = 0; i < 22; i++) {
-        key += chars.charAt(Math.floor(Math.random() * chars.length));
-      }
-      document.getElementById('key').innerText = key;
-      document.getElementById('copy-btn').style.display = 'inline-block';
-    }
+  <header>
+    <div class="logo-text">mAI</div>
+    <h1>mAI</h1>
+    <p class="subtitle">par mStore</p>
+    <a href="https://drive.google.com/uc?export=download&id=1KboFZOHcRpusoAA-s6q36Po6OlskvzGi" download class="download-btn">
+      Obtenir
+    </a>
+  </header>
 
-    function copyKey() {
-      const text = document.getElementById('key').innerText;
-      navigator.clipboard.writeText(text).then(() => {
-        alert("Clé copiée !");
-      }).catch(() => {
-        alert("Erreur lors de la copie !");
-      });
-    }
-  </script>
+  <section class="section">
+    <h2>Description</h2>
+    <p>
+      mAI est une intelligence artificielle nouvelle génération, rapide, précise et personnalisable. Que ce soit pour poser une question, créer un texte ou coder, elle t’aide partout.
+    </p>
+  </section>
+
+  <section class="section">
+    <h2>Version</h2>
+    <div class="changelog">
+      <div class="version">
+        <h3>vPublic_update_version</h3>
+      </div>
+    </div>
+  </section>
+
 </body>
 </html>
