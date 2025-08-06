@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>APIs pour mAI Devlopers</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      background-color: #121212;
+      color: white;
+      font-family: 'Inter', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+      margin: 0;
+      text-align: center;
+    }
+
+    h1 {
+      margin-bottom: 30px;
+      font-weight: 700;
+      font-size: 2.5rem;
+      color: white;
+    }
+
+    select, input[type="text"] {
+      padding: 10px 15px;
+      margin: 10px 0;
+      border-radius: 6px;
+      border: none;
+      font-size: 1rem;
+      width: 280px;
+      max-width: 90vw;
+      background-color: #1e1e1e;
+      color: white;
+    }
+
+    #apiKeyDisplay {
+      margin: 20px 0;
+      padding: 15px 20px;
+      width: 320px;
+      max-width: 90vw;
+      background-color: #1e1e1e;
+      border-radius: 8px;
+      font-family: monospace;
+      font-size: 1.1rem;
+      user-select: all;
+      word-break: break-word;
+      min-height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+    }
+
+    button {
+      margin: 10px 8px 0 8px;
+      padding: 12px 22px;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      background: white;
+      color: black;
+      transition: opacity 0.3s ease;
+    }
+
+    button:hover:not(:disabled) {
+      opacity: 0.85;
+    }
+
+    button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    label {
+      margin-top: 15px;
+      font-weight: 600;
+      display: block;
+      font-size: 1.1rem;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>APIs pour mAI Devlopers</h1>
+
+  <label for="modelSelect">Choix du modèle</label>
+  <select id="modelSelect">
+    <option value="m-4.0">m-4.0</option>
+    <option value="m-4.5 Pro">m-4.5 Pro</option>
+    <option value="m-4.9+">m-4.9+</option>
+  </select>
+
+  <label for="apiName">Nom de l'API</label>
+  <input type="text" id="apiName" placeholder="Nom de l'API..." />
+
+  <div id="apiKeyDisplay">Aucune clé générée</div>
+
+  <button id="generateBtn" disabled>Générer la clé</button>
+  <button id="copyBtn" disabled>Copier la clé</button>
+  <button id="shareBtn" disabled>Partager</button>
+
+  <script>
+    let apiKey = "";
+
+    function generateRandomKey(length = 20) {
+      const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+      let key = "";
+      for (let i = 0; i < length; i++) {
+        key += chars.charAt(Math.floor(Math.random() * chars.length));
+      }
+      return key;
+    }
+
+    const apiKeyDisplay = document.getElementById("apiKeyDisplay");
+    const generateBtn = document.getElementById("generateBtn");
+    const copyBtn = document.getElementById("copyBtn");
+    const shareBtn = document.getElementById("shareBtn");
+    const apiNameInput = document.getElementById("apiName");
+    const modelSelect = document.getElementById("modelSelect");
+
+    apiNameInput.addEventListener("input", () => {
+      generateBtn.disabled = apiNameInput.value.trim() === "";
+    });
+
+    generateBtn.addEventListener("click", () => {
+      const model = modelSelect.value;
+      const randomPart = generateRandomKey(20);
+      apiKey = `${model}-${randomPart}`;
+      apiKeyDisplay.textContent = apiKey;
+      copyBtn.disabled = false;
+      shareBtn.disabled = false;
+    });
+
+    copyBtn.addEventListener("click", () => {
+      if (!apiKey) return;
+      navigator.clipboard.writeText(apiKey).then(() => {
+        const originalText = copyBtn.textContent;
+        copyBtn.textContent = "Copié !";
+        setTimeout(() => {
+          copyBtn.textContent = originalText;
+        }, 2000);
+      });
+    });
+
+    shareBtn.addEventListener("click", () => {
+      if (!apiKey) return;
+      const apiName = apiNameInput.value.trim() || "mAI Platform";
+      const model = modelSelect.value;
+      const subject = encodeURIComponent("Clé API mAI Devlopers");
+      const body = encodeURIComponent(`Bonjour,\nVoici ma clé API d'${apiName} (modèle : ${model}) : ${apiKey}\nBonne journée`);
+      window.location.href = `mailto:?subject=${subject}&body=${body}`;
+    });
+  </script>
+
+</body>
+</html>

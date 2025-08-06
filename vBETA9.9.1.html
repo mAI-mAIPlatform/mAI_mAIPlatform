@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>mAI Developers</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      background-color: #f4f4f4;
+      color: #111;
+      padding: 40px 20px;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 30px;
+      text-align: center;
+    }
+
+    .card {
+      background: white;
+      padding: 25px;
+      margin-bottom: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+      font-weight: 600;
+    }
+
+    label {
+      display: block;
+      margin: 10px 0 5px;
+      font-weight: 500;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 12px;
+      font-size: 1rem;
+      background: #f9f9f9;
+      color: #111;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+
+    button {
+      padding: 12px 20px;
+      background: #111;
+      color: white;
+      font-weight: 600;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 5px;
+      transition: 0.2s;
+    }
+
+    button:hover {
+      background: #333;
+    }
+
+    table {
+      width: 100%;
+      margin-top: 10px;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    code {
+      background: #eee;
+      padding: 10px;
+      display: block;
+      border-radius: 8px;
+      margin-top: 10px;
+      font-size: 0.95rem;
+    }
+
+    #keyOutput {
+      margin-top: 10px;
+    }
+
+    @media (max-width: 600px) {
+      h1 { font-size: 2rem; }
+      h2 { font-size: 1.3rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🧠 mAI Developers</h1>
+
+    <div class="card">
+      <h2>🎯 Générer une clé API</h2>
+      <label>Modèle :</label>
+      <select id="model">
+        <option value="m-4.0">m-4.0</option>
+        <option value="m-4.5 Pro">m-4.5 Pro</option>
+        <option value="m-4.9+">m-4.9+</option>
+        <option value="LucasAI">LucasAI</option>
+      </select>
+
+      <label>Nom de la clé :</label>
+      <input type="text" id="keyName" placeholder="ex: Clé mobile">
+
+      <button onclick="generateKey()">Générer une clé</button>
+      <div id="keyOutput"></div>
+    </div>
+
+    <div class="card">
+      <h2>🔑 Clés générées</h2>
+      <table id="keyTable">
+        <thead>
+          <tr>
+            <th>Nom</th>
+            <th>Modèle</th>
+            <th>Date</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <div class="card">
+      <h2>📄 Exemple de requête API</h2>
+      <p>Endpoint :</p>
+      <code>POST https://www.api.m-ai.com</code>
+      <p>Headers :</p>
+      <code>Authorization: mAIDevlopersv4</code>
+      <p>Body JSON :</p>
+      <code>{ "prompt": "Bonjour", "max_tokens": 100 }</code>
+    </div>
+  </div>
+
+  <script>
+    const keyTable = document.getElementById("keyTable").querySelector("tbody");
+    const keyOutput = document.getElementById("keyOutput");
+
+    function generateKey() {
+      const name = document.getElementById("keyName").value.trim();
+      const model = document.getElementById("model").value;
+      if (!name) return alert("Remplis le nom !");
+      const modelPrefix = model.replace(/ /g, "").replace("+", "plus");
+      const key = modelPrefix + "-" + Math.random().toString(36).substring(2, 12);
+      const row = keyTable.insertRow();
+      row.innerHTML = `<td>${name}</td><td>${model}</td><td>${new Date().toLocaleDateString()}</td><td><button onclick="this.closest('tr').remove()">🗑️ Supprimer</button></td>`;
+      keyOutput.innerHTML = `<code id="generatedKey">${key}</code><button onclick="copyKey()">Copier</button>`;
+    }
+
+    function copyKey() {
+      const key = document.getElementById("generatedKey").innerText;
+      navigator.clipboard.writeText(key);
+      const btn = keyOutput.querySelector("button");
+      btn.innerText = "Clé copiée ✔️";
+      setTimeout(() => btn.innerText = "Copier", 2000);
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>mAPI - mAI Developers</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background-color: #0d1117;
+      color: #ffffff;
+      font-family: 'Inter', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 60px 20px;
+      min-height: 100vh;
+    }
+
+    h1 {
+      font-size: 34px;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    p.subtitle {
+      font-size: 16px;
+      color: #8b949e;
+      margin-bottom: 30px;
+    }
+
+    .container {
+      background-color: #161b22;
+      padding: 30px;
+      border-radius: 12px;
+      width: 100%;
+      max-width: 600px;
+      box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+    }
+
+    label {
+      display: block;
+      font-size: 18px;
+      margin-bottom: 8px;
+      color: #c9d1d9;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 12px;
+      font-size: 16px;
+      background-color: #0d1117;
+      border: 1px solid #30363d;
+      border-radius: 8px;
+      color: white;
+      margin-bottom: 20px;
+    }
+
+    button {
+      background-color: #238636;
+      border: none;
+      padding: 12px 24px;
+      font-size: 16px;
+      border-radius: 8px;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    button:hover {
+      background-color: #2ea043;
+    }
+
+    #result {
+      margin-top: 30px;
+      background-color: #0d1117;
+      padding: 16px;
+      border: 1px solid #30363d;
+      border-radius: 8px;
+      display: none;
+      word-break: break-word;
+    }
+
+    .key-label {
+      font-size: 14px;
+      color: #8b949e;
+      margin-bottom: 4px;
+    }
+
+    .key-value {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .copy-btn {
+      background-color: #21262d;
+      color: #c9d1d9;
+      border: 1px solid #30363d;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .copy-btn:hover {
+      background-color: #30363d;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>mAPI</h1>
+  <p class="subtitle">pour mAI Developers</p>
+
+  <div class="container">
+    <label for="keyName">Nom de la clé</label>
+    <input type="text" id="keyName" placeholder="Ex: Clé pour projet mSearch" />
+
+    <button onclick="generateKey()">Générer une clé API</button>
+
+    <div id="result">
+      <div class="key-label">Clé générée :</div>
+      <div class="key-value" id="generatedKey"></div>
+      <button class="copy-btn" onclick="copyKey()">Copier la clé</button>
+    </div>
+  </div>
+
+  <script>
+    function generateKey() {
+      const name = document.getElementById('keyName').value.trim();
+      if (name === "") {
+        alert("Merci de nommer ta clé avant de la générer.");
+        return;
+      }
+
+      let chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+      let key = 'm-';
+      for (let i = 0; i < 22; i++) {
+        key += chars.charAt(Math.floor(Math.random() * chars.length));
+      }
+
+      document.getElementById('generatedKey').innerText = key;
+      document.getElementById('result').style.display = 'block';
+    }
+
+    function copyKey() {
+      const key = document.getElementById('generatedKey').innerText;
+      navigator.clipboard.writeText(key).then(() => {
+        const btn = document.querySelector('.copy-btn');
+        btn.innerText = 'Clé copiée ✅';
+        setTimeout(() => {
+          btn.innerText = 'Copier la clé';
+        }, 2000);
+      });
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Générateur de Clé API</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background-color: #121212;
+      color: #f1f1f1;
+      font-family: 'Inter', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+    h1 {
+      font-weight: 600;
+    }
+    button {
+      background-color: #1f1f1f;
+      border: 1px solid #333;
+      color: #fff;
+      padding: 10px 20px;
+      font-size: 16px;
+      margin: 10px;
+      cursor: pointer;
+      border-radius: 6px;
+      transition: background 0.2s;
+    }
+    button:hover {
+      background-color: #333;
+    }
+    #key {
+      font-size: 18px;
+      margin-top: 20px;
+      padding: 10px;
+      background-color: #1e1e1e;
+      border-radius: 6px;
+      word-break: break-all;
+    }
+    #copy-btn {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>Générateur de Clé API</h1>
+  <button onclick="generateKey()">Générer une clé</button>
+  <div id="key"></div>
+  <button id="copy-btn" onclick="copyKey()">Copier la clé</button>
+
+  <script>
+    function generateKey() {
+      let chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+      let key = 'm-';
+      for (let i = 0; i < 22; i++) {
+        key += chars.charAt(Math.floor(Math.random() * chars.length));
+      }
+      document.getElementById('key').innerText = key;
+      document.getElementById('copy-btn').style.display = 'inline-block';
+    }
+
+    function copyKey() {
+      const text = document.getElementById('key').innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        alert("Clé copiée !");
+      }).catch(() => {
+        alert("Erreur lors de la copie !");
+      });
+    }
+  </script>
+</body>
+</html>
