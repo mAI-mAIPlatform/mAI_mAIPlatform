@@ -1,0 +1,27 @@
+{
+    "app_name": "mAI",
+    "main": "mAI Website.htm",
+    "name": "mAI",
+    "webexe_settings": {
+        "download_dir": "",
+        "force_download": false,
+        "linux-x32": true,
+        "linux-x64": true,
+        "mac-x64": true,
+        "nw_compression_level": 0,
+        "sdk_build": false,
+        "uncompressed_folder": false,
+        "windows-x32": true,
+        "windows-x64": true
+    },
+    "webkit": {},
+    "window": {
+        "frame": true,
+        "id": "mAI",
+        "resizable": true,
+        "show": true,
+        "show_in_taskbar": true,
+        "title": "mAI",
+        "visible": true
+    }
+}
