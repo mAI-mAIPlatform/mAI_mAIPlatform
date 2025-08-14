@@ -1,8 +1,38 @@
-# mAI et mAIPlatform
-mAI est une plateforme en ligne dédiée à l’intelligence artificielle, conçue pour offrir un accès simple et efficace à des outils IA avancés. Que vous soyez développeur, professionnel ou passionné, mAI propose une interface intuitive pour exploiter facilement la puissance de l’IA dans vos projets.
-Dans cet espace dédié, découvrez les fichiers d'mAI et d'mAIPlatfrom.
-Découvrez les nouveaux modèles d'mAI : m-4.0, m-4.5 Pro, m-4.9+ et LucasAI !
+# Website
 
-Information et mise à jour le 13/08/2025 : OpenAI et mAI s'associent pour offrir le meilleur de l'intelligence artificielle (GPT-5s).
+This website is built using [Docusaurus 2](https://docusaurus.io/), a modern static website generator.
 
-Par les mAIDevlopers.
+### Installation
+
+```
+$ yarn
+```
+
+### Local Development
+
+```
+$ yarn start
+```
+
+This command starts a local development server and opens up a browser window. Most changes are reflected live without having to restart the server.
+
+#### About search
+
+In order to play aroud with search locally you need to set algolia env variables by default set to "empty"
+`export ALGOLIA_API_KEY =__YOUR_ALGOLIA_API_KEY__`
+`export ALGOLIA_APP_ID =__YOUR_ALGOLIA_APP_ID__`
+`export ALGOLIA_INDEX =__YOUR_ALGOLIA_INDEX__`
+
+A temporary solution has been done since we redirect everything from /docs/ to this documetation site. Whenever we remove this redirect we should remove the `customWithBaseUrl` function in the `src/theme/SearchBar/index.tsx` and use the native `withBaseUrl` instead.
+
+### Build
+
+```
+$ yarn build
+```
+
+This command generates static content into the `build` directory and can be served using any static contents hosting service.
+
+### Deployment
+
+Deployement is handled by Vercel
